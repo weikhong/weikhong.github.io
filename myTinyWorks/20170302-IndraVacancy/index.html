@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<!-- Latest compiled and minified CSS -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+	<link rel="stylesheet" href="default.css">
+	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.17.1/moment.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/angular-moment/1.0.1/angular-moment.min.js"></script>
+	<script src="indexApp.js"></script>
+</head>
+<body ng-app="myApp" ng-controller="myCtrl" >
+	<div class="panel panel-primary">
+		<div class="panel-heading">Interview Assignment</div>
+		<div class="panel-body">
+			<div ng-hide="isJsonReady" class="ng-hide">
+				<i class="fa fa-spinner fa-spin fa-3x fa-fw"></i><span>Loading...</span>
+			</div>
+			<div class="list-group">
+				<div href="#" class="list-group-item" ng-class-even="'list-group-item-warning'" ng-repeat="starship in starships | _customFilterByPosition:'5,9,10,11,15' | orderBy:orderByFunction:true">
+					<h4 class="list-group-item-heading">
+						<span>Starship Model, </span>
+						<span>{{starship.model}}</span>
+					</h4>
+					<p class="list-group-item-text">
+						<div>Manufacturer: {{starship.manufacturer}}</div>
+						<div>
+							Crew: 
+							<input ng-model="starship.crew" ng-model-options="{updateOn:'blur'}">
+						</div>
+						<div>
+							<span>Last Modification Date:</span>
+							<span>{{starship.edited | date:"yyyy.MM.dd, H:mm:ss a"}} (Local Timezone)</span>
+							<span> / {{starship.edited | amUtc | amDateFormat:'YYYY.MM.DD HH:mm:ss'}} (UTC)</span>
+							<span> / {{starship.edited}} (ISO 8601)</span>
+						</div>
+					</p>
+				</div>
+			</div><!-- ./list-group -->
+		</div><!-- ./panel-body-->
+		<div class="panel-footer">
+			<span class="pull-right">Created by {{firstName}}, {{lastName}} @2017</span>
+			<div class="clearfix"></div>
+		</div>
+	</div>
+</body>
+</html>
