@@ -31,13 +31,13 @@ var app = angular.module('myApp', ['angularMoment']);
 					$http.get(targetedRestUrl)
 						.then(function(response) {
 							var _resultsArray = response.data.results;
-							var _next = response.data.next;
+							var _next = response.data.next.replace("http", "https");
 
-							//console.log(callDepth, _resultsArray.length, response.data);
+							console.log(callDepth, _resultsArray.length, response.data);
 							if(_next!==null) {
 								callDepth++;
-								//console.log(_next.replace("http", "https"));
-								_this.fetch(_next.replace("http", "https"), callDepth).then(function(returnedResultArray) {
+								console.log(_next, callDepth);
+								_this.fetch(_next, callDepth).then(function(returnedResultArray) {
 									_resultsArray = _resultsArray.concat(returnedResultArray);
 									_deferred.resolve(_resultsArray);
 								});
