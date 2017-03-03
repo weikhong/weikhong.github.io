@@ -27,25 +27,22 @@ var app = angular.module('myApp', ['angularMoment']);
 
 					if(callDepth===undefined) callDepth = 0;
 
-					console.log(targetedRestUrl);
 					$http.get(targetedRestUrl)
 						.then(function(response) {
 							var _resultsArray = response.data.results;
-							//var _next = response.data.next.replace("http", "https");
 
-							console.log(callDepth, _resultsArray.length, response.data);
-							// if(_next!==null) {
-							// 	callDepth++;
-							// 	console.log(_next, callDepth);
-							// 	_this.fetch(_next, callDepth).then(function(returnedResultArray) {
-							// 		_resultsArray = _resultsArray.concat(returnedResultArray);
-							// 		_deferred.resolve(_resultsArray);
-							// 	});
-							// }
-							// else {
-							// 	_deferred.resolve(_resultsArray);
-							// }
-							_deferred.resolve(_resultsArray);
+							//console.log(callDepth, _resultsArray.length, response.data);
+							if(response.data.next!==null) {
+								var _next = response.data.next.replace("http", "https");
+								callDepth++;
+								_this.fetch(_next, callDepth).then(function(returnedResultArray) {
+									_resultsArray = _resultsArray.concat(returnedResultArray);
+									_deferred.resolve(_resultsArray);
+								});
+							}
+							else {
+								_deferred.resolve(_resultsArray);
+							}
 		        });
 
 						return _deferred.promise;
