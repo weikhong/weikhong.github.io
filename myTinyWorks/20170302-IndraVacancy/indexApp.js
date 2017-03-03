@@ -27,6 +27,7 @@ var app = angular.module('myApp', ['angularMoment']);
 
 					if(callDepth===undefined) callDepth = 0;
 
+					console.log(targetedRestUrl);
 					$http.get(targetedRestUrl)
 						.then(function(response) {
 							var _resultsArray = response.data.results;
