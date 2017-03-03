@@ -55,7 +55,7 @@ var app = angular.module('myApp', ['angularMoment']);
 		// =========================================
 		app.controller('myCtrl', function($scope, $http, $filter, _customRestService) {
 			_customRestService
-				.fetch('https://swapi.co/api/starships')
+				.fetch('https://swapi.co/api/starships/')
 				.then(function(returnedResultArray) {
 					//$scope.starships = $filter('filter')(returnedResultArray, {crew: '5'})[0];
 					// for (var i = 0; i < returnedResultArray.length; i++) {
